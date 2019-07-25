@@ -7,9 +7,15 @@ def get_translation_url(text, sl='en', tl='es'):
 
 def get_translate(html):
     main_container = html.find('div', class_='main-header')
+    suggestion_container = main_container.find(id='spelling-correction', style='')
     results_container = main_container.find('div', class_='tlid-results-container')
-    translated_text = results_container.find('span', class_='tlid-translation').find('span').text
-    return translated_text, ''
+
+    translated_text = results_container.find('span', class_='tlid-translation').span.text
+    suggestion_text = ''
+    if suggestion_container and suggestion_container.text:
+        suggestion_text = suggestion_container.a.b.i.text
+
+    return translated_text, suggestion_text
     
 
 app = Flask(__name__)
@@ -22,7 +28,7 @@ def translate_word():
         bs_html = BeautifulSoup(translation_html.text, 'html.parser')
         translated_text, suggestion = get_translate(bs_html)
 
-        return jsonify({'code': 200, 'data': { 'translation': translated_text }})
+        return jsonify({'code': 200, 'data': { 'translation': translated_text, 'suggestion': suggestion }})
     except:
         return jsonify({'code': 500, 'error': True})
 

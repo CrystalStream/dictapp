@@ -6,7 +6,7 @@ module_dir = os.path.dirname('..')
 sys.path.append(os.path.join(module_dir, '../scraper/'))
 
 from app import app
-from fixtures import car_es_2_en
+from fixtures import basic_es_2_en, basic_en_2_es, suggestion_en_to_es, suggestion_es_to_en
 
 def get_translation_url(text, sl='en', tl='es'):
     return 'https://translate.google.com/?text={}&sl={}&tl={}'.format(text, sl, tl)
@@ -17,7 +17,10 @@ def mocked_request(query):
             self.text = kwargs['html']
     
     switcher = {
-        get_translation_url('Cars'): MockResponse(html=car_es_2_en.html),
+        get_translation_url('Cars'): MockResponse(html=basic_es_2_en.html),
+        get_translation_url('Coches', sl='es', tl='en'): MockResponse(html=basic_en_2_es.html),
+        get_translation_url('Widt'): MockResponse(html=suggestion_en_to_es.html),
+        get_translation_url('Jugand', sl='es', tl='en'): MockResponse(html=suggestion_es_to_en.html),
     }
 
     return switcher.get(query, MockResponse(html='<p class="not-found">Not found</p>'))
@@ -41,11 +44,37 @@ class ScraperTest(unittest.TestCase):
 
     @mock.patch('app.requests.get', side_effect=mocked_request)
     def test_basic_search_en_to_es(self, mocked_req):
-        """ Should return the translated word """
+        """ Should return the translated en to es word """
 
         response = self.client.get('/translate?text=Cars&sl=en&tl=es').get_json()
         self.assertEqual(response['code'], 200)
         self.assertEqual(response['data']['translation'], 'Coches')
+    
+    @mock.patch('app.requests.get', side_effect=mocked_request)
+    def test_basic_search_es_to_en(self, mocked_req):
+        """ Should return the translated es to en word """
+
+        response = self.client.get('/translate?text=Coches&sl=es&tl=en').get_json()
+        self.assertEqual(response['code'], 200)
+        self.assertEqual(response['data']['translation'], 'Cars')
+    
+    @mock.patch('app.requests.get', side_effect=mocked_request)
+    def test_basic_search_en_to_es_with_suggestion(self, mocked_req):
+        """ Should return the translated en to es word with suggestions """
+
+        response = self.client.get('/translate?text=Widt&sl=en&tl=es').get_json()
+        self.assertEqual(response['code'], 200)
+        self.assertEqual(response['data']['translation'], 'Ancho')
+        self.assertEqual(response['data']['suggestion'], 'Width')
+    
+    @mock.patch('app.requests.get', side_effect=mocked_request)
+    def test_basic_search_es_to_en_with_suggestion(self, mocked_req):
+        """ Should return the translated en to es word with suggestions """
+
+        response = self.client.get('/translate?text=Jugand&sl=es&tl=en').get_json()
+        self.assertEqual(response['code'], 200)
+        self.assertEqual(response['data']['translation'], 'Playing')
+        self.assertEqual(response['data']['suggestion'], 'Jugando')
 
 if __name__ == "__main__":
     unittest.main()
