@@ -1,5 +1,7 @@
+from urllib.parse import quote
+
 def get_translation_url(text, sl='en', tl='es'):
-    return 'https://translate.google.com/?text={}&sl={}&tl={}'.format(text, sl, tl)
+    return 'https://translate.google.com/?text={}&sl={}&tl={}'.format(quote(text), sl, tl)
 
 def get_translate(html):
     main_container = html.find('div', class_='main-header')
