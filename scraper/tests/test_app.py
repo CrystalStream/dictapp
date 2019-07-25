@@ -6,10 +6,8 @@ module_dir = os.path.dirname('..')
 sys.path.append(os.path.join(module_dir, '../scraper/'))
 
 from app import app
+import utils
 from fixtures import basic_es_2_en, basic_en_2_es, suggestion_en_to_es, suggestion_es_to_en
-
-def get_translation_url(text, sl='en', tl='es'):
-    return 'https://translate.google.com/?text={}&sl={}&tl={}'.format(text, sl, tl)
 
 def mocked_request(query):
     class MockResponse():
@@ -17,10 +15,10 @@ def mocked_request(query):
             self.text = kwargs['html']
     
     switcher = {
-        get_translation_url('Cars'): MockResponse(html=basic_es_2_en.html),
-        get_translation_url('Coches', sl='es', tl='en'): MockResponse(html=basic_en_2_es.html),
-        get_translation_url('Widt'): MockResponse(html=suggestion_en_to_es.html),
-        get_translation_url('Jugand', sl='es', tl='en'): MockResponse(html=suggestion_es_to_en.html),
+        utils.get_translation_url('Cars'): MockResponse(html=basic_es_2_en.html),
+        utils.get_translation_url('Coches', sl='es', tl='en'): MockResponse(html=basic_en_2_es.html),
+        utils.get_translation_url('Widt'): MockResponse(html=suggestion_en_to_es.html),
+        utils.get_translation_url('Jugand', sl='es', tl='en'): MockResponse(html=suggestion_es_to_en.html),
     }
 
     return switcher.get(query, MockResponse(html='<p class="not-found">Not found</p>'))
