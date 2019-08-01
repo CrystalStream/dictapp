@@ -1,0 +1,103 @@
+@import '../node_modules/bulma/bulma.sass';
+@import './assets/scss/mixins';
+@import './assets/scss/icons';
+
+.dictapp {
+
+  max-width: 500px;
+  min-width: 500px;
+  max-height: 600px;
+  min-height: 600px;
+  overflow: hidden;
+  box-shadow: 0 0 3px #1C2541;
+  border-radius: 0 0 10px 10px;
+
+  .app-navbar {
+    background: #FFC864;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFF2DC, #FFD486, #FFC864);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFF2DC, #FFD486, #FFC864); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: .3rem;
+
+    img {
+      width: 130px;
+      object-fit: cover;
+    }
+  }
+
+  .main-section {
+    padding-top: 2rem;
+  }
+
+  .config-button {
+    background: transparent;
+    border: none;
+    transition: .3s;
+
+    &:hover {
+      span {
+        color: hsl(0, 0%, 96%);
+      }
+    }
+
+    &:active {
+      outline: none;
+      border: none;
+      transform: scale(.8);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  .control {
+    textarea {
+      max-height: 180px;
+      min-height: 180px;
+
+      &:active, &:focus {
+        border-color: #dbdbdb;
+        box-shadow: inset 0 1px 6px rgba(10, 10, 10, 0.1);
+      }
+    }
+  }
+
+  .footer {
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .suggestion-container {
+    position: absolute;
+    background: #E6E4E4;
+    width: 100%;
+    top: 8.9rem;
+    border-radius: 0 0 4px 4px;
+    padding: 0.3rem .7rem;
+    height: 50px;
+    color: #64787D;
+    word-break: break-all;
+
+    &:before {
+      @include icon;
+      content: "\e900";
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+
+    & > div {
+      display: inline-block;
+      padding-left: 10px;
+      text-decoration: underline;
+      width: 95%;
+
+      p {
+        cursor: pointer;
+        font-size: 13px;
+      }
+    }
+  }
+}
