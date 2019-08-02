@@ -51,6 +51,35 @@
     }
   }
 
+  .flip-button {
+    transition: transform .3s;
+
+    &:active, &:focus {
+      border-color: #dbdbdb;
+      box-shadow: none;
+    }
+
+    &.es {
+      transform: rotateY(180deg);
+
+      .back-button {
+        p {
+          transform: rotateY(180deg);
+        }
+      }
+    }
+
+    .back-button, .front-button {
+      width: 100%;
+      backface-visibility: hidden;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
   .control {
     textarea {
       max-height: 180px;
