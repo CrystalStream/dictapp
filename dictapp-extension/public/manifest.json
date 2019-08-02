@@ -1,15 +1,53 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
+  "short_name": "DP",
+  "name": "Dictapp - Translate the whole world",
+  "manifest_version": 2,
+  "author": "Christofer Flores",
+  "version": "1.0.0",
+  "description": "Chrome extension that can translate any word bettween english and spanish",
+  "browser_action": {
+    "default_popup": "./index.html",
+    "default_title": "Dictapp"
+  },
+  "icons": {
+    "16": "favicon-16x16.png",
+    "48": "favicon-32x32.png",
+    "128": "favicon-96x96.png"
+  },
+  "content_scripts": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [],
+      "js": ["./contentScript.js"]
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background": {
+    "scripts": ["extension.js"],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Z",
+        "mac": "Command+Z",
+        "chromeos": "Ctrl+Z",
+        "linux": "Ctrl+Z"
+      }
+    },
+    "open-and-translate": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "Open the extension and translate the selected text"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
 }

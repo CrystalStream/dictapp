@@ -4,7 +4,9 @@ import Footer from './ui/Footer'
 import Input from './DPInput'
 
 function Translator(props) {
-  
+  const selectedText = localStorage.getItem('selection')
+  localStorage.clear()
+
   return (
     <form>
       <Switcher />
@@ -12,7 +14,7 @@ function Translator(props) {
       <div className="control">
         <div className="columns">
           <div className="column">
-            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing2" />
+            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing" text={selectedText} />
           </div>
         </div>
         <div className="columns">

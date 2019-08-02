@@ -4,11 +4,20 @@ function Switcher(props) {
 
   const [ enToEs, setLang ] = useState(true)
 
+  const onClick = e => {
+    /* global chrome */
+
+    e.preventDefault();
+    var bkg = chrome.extension.getBackgroundPage()
+    bkg.console.log('local', bkg.localStorage.getItem('selection'))
+    setLang(!enToEs)
+  };
+
   return (
     <div className="switcher-button-container has-text-centered">
       <div className="columns is-flex is-centered is-vcentered">
-        <div className="column is-5">
-          <button className={`button is-normal is-fullwidth flip-button ${enToEs ? '' : 'es'}`} onClick={(e) => { e.preventDefault(); setLang(!enToEs) } }>
+        <div className="column is-4">
+        <button className={`button is-normal flip-button ${enToEs ? '' : 'es'}`} onClick={onClick}>
             <div className={`front-button ${ enToEs ? 'active': ''}`}>
               <p>
                 English &nbsp;&nbsp;<span className="icon-repeat"></span>&nbsp;&nbsp; Spanish
