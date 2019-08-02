@@ -12,7 +12,7 @@ function Translator(props) {
       <div className="control">
         <div className="columns">
           <div className="column">
-            <Input placeholder="Type your search and hit 'Enter'" suggestion />
+            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing2" />
           </div>
         </div>
         <div className="columns">

@@ -7,7 +7,7 @@ function DPInput({suggestion, ...props}) {
   return (
     <>
       <textarea className={classes.join(' ')} {...props}></textarea>
-      {suggestion && <Suggestion text="testing"/>}
+      {suggestion && <Suggestion text={suggestion} />}
     </>
   )
 
