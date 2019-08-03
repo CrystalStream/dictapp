@@ -37,17 +37,10 @@
     "_execute_browser_action": {
       "suggested_key": {
         "windows": "Ctrl+Z",
-        "mac": "Command+Z",
+        "mac": "MacCtrl+Z",
         "chromeos": "Ctrl+Z",
         "linux": "Ctrl+Z"
       }
-    },
-    "open-and-translate": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Z",
-        "mac": "Command+Shift+Z"
-      },
-      "description": "Open the extension and translate the selected text"
     }
   },
   "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
