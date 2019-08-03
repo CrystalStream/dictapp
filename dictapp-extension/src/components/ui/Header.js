@@ -4,7 +4,7 @@ import Logo from '../../assets/img/logo.png'
 function Header(props) {
 
   return (
-    <nav className="navbar app-navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar app-navbar is-flex" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
           <img src={Logo} alt="Translate has never been so easy" width="112" height="50" />

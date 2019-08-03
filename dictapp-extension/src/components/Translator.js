@@ -12,7 +12,6 @@ function Translator() {
     chrome.sendMessage('lplhnabkljkdpaellhdcmfgcnmkapjpb', 'getSelectedText', setSelection)
   }, [])
 
-
   return (
     <form>
       <Switcher />
@@ -20,7 +19,11 @@ function Translator() {
       <div className="control">
         <div className="columns">
           <div className="column">
-            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing" value={text} onChange={(e) => { setSelection(e.target.value) }} />
+            <Input
+              placeholder="Type your search and hit 'Enter'"
+              suggestion=""
+              value={text}
+              onChange={(e) => { setSelection(e.target.value) }} />
           </div>
         </div>
         <div className="columns">
