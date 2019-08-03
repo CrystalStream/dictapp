@@ -1,5 +1,8 @@
 /* global chrome */
 
+/**
+ * Return the background page for the react extension
+ */
 function getBackgroundPage() {
   if (chrome.extension) {
     return chrome.extension.getBackgroundPage()
@@ -7,6 +10,10 @@ function getBackgroundPage() {
   return null
 }
 
+/**
+ * Debug purposes
+ * console log to the react extension debug page
+ */
 function consoleLog() {
   const page = getBackgroundPage()
 
@@ -16,6 +23,9 @@ function consoleLog() {
     
 }
 
+/**
+ * Send messages to the chrome api listeners
+ */
 function sendMessage() {
   if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
     return chrome.runtime.sendMessage(...arguments)
@@ -24,6 +34,7 @@ function sendMessage() {
 }
 
 export default {
+  extensionID: chrome.runtime.id || 'lplhnabkljkdpaellhdcmfgcnmkapjpb',
   consoleLog,
   sendMessage
 }

@@ -1,4 +1,8 @@
-function sendUserSelectedText() {
+/**
+ * Get the user selection of the current window he's looking at
+ * and send a message to store it on localstorage of the chrome extension
+ */
+function broadcastSelection() {
   const userSelectedText = window.getSelection().toString()
 
   if (!userSelectedText) return;
@@ -6,7 +10,8 @@ function sendUserSelectedText() {
   const eventTitle = `selection<-->${userSelectedText}`
 
   // Send the message with especial nomenclature
-  chrome.runtime.sendMessage('lplhnabkljkdpaellhdcmfgcnmkapjpb', eventTitle)
+  chrome.runtime.sendMessage(chrome.runtime.id, eventTitle)
 }
 
-sendUserSelectedText()
+// Broadcast the user selection
+broadcastSelection()

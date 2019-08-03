@@ -5,7 +5,8 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import chrome from './utils'
 
-chrome.sendMessage('lplhnabkljkdpaellhdcmfgcnmkapjpb','runContentScript')
+// Send the message to run the content script
+chrome.sendMessage(chrome.extensionID, 'runContentScript')
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

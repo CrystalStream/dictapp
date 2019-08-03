@@ -9,7 +9,9 @@ function Translator() {
   const [text, setSelection] = useState('')
 
   useEffect(() => {
-    chrome.sendMessage('lplhnabkljkdpaellhdcmfgcnmkapjpb', 'getSelectedText', setSelection)
+
+    // Get the user selection of the active window's tab
+    chrome.sendMessage(chrome.extensionID, 'getSelection', setSelection)
   }, [])
 
   return (

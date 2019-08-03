@@ -2,7 +2,7 @@
 
 function setupListeners() {
   chrome.runtime.onMessage.addListener(function(message, _, sendResponse) {
-      if (message == "runContentScript"){
+      if (message == 'runContentScript'){
         chrome.tabs.executeScript({
           file: 'contentScript.js'
         })
@@ -13,7 +13,7 @@ function setupListeners() {
         localStorage.setItem('selection', selectedText)
       }
 
-      if (message === 'getSelectedText')  {
+      if (message === 'getSelection')  {
         let text = localStorage.getItem('selection')
         if (!text) text = ''
         localStorage.clear()
