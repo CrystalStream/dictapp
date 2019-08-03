@@ -1,17 +1,23 @@
 /* global chrome */
 
 function setupListeners() {
-  chrome.runtime.onMessage.addListener(function(message) {
-
+  chrome.runtime.onMessage.addListener(function(message, _, sendResponse) {
       if (message == "runContentScript"){
         chrome.tabs.executeScript({
           file: 'contentScript.js'
         })
       }
 
-      else if (/<-->/.test(message)) {
+      if (/<-->/.test(message)) {
         const [ _, selectedText ] = message.split('<-->')
         localStorage.setItem('selection', selectedText)
+      }
+
+      if (message === 'getSelectedText')  {
+        let text = localStorage.getItem('selection')
+        if (!text) text = ''
+        localStorage.clear()
+        sendResponse(text)
       }
    })
   

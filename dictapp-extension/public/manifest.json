@@ -30,7 +30,8 @@
   "permissions": [
     "tabs",
     "http://*/",
-    "https://*/"
+    "https://*/",
+    "background"
   ],
   "commands": {
     "_execute_browser_action": {

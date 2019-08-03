@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Switcher from './ui/Switcher'
 import Footer from './ui/Footer'
 import Input from './DPInput'
+import chrome from '../utils'
 
-function Translator(props) {
-  const selectedText = localStorage.getItem('selection')
-  localStorage.clear()
+function Translator() {
+
+  const [text, setSelection] = useState('')
+
+  useEffect(() => {
+    chrome.sendMessage('lplhnabkljkdpaellhdcmfgcnmkapjpb', 'getSelectedText', setSelection)
+  }, [])
+
 
   return (
     <form>
@@ -14,7 +20,7 @@ function Translator(props) {
       <div className="control">
         <div className="columns">
           <div className="column">
-            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing" text={selectedText} />
+            <Input placeholder="Type your search and hit 'Enter'" suggestion="testing" value={text} onChange={(e) => { setSelection(e.target.value) }} />
           </div>
         </div>
         <div className="columns">

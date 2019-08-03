@@ -5,11 +5,7 @@ function Switcher(props) {
   const [ enToEs, setLang ] = useState(true)
 
   const onClick = e => {
-    /* global chrome */
-
     e.preventDefault();
-    var bkg = chrome.extension.getBackgroundPage()
-    bkg.console.log('local', bkg.localStorage.getItem('selection'))
     setLang(!enToEs)
   };
 
