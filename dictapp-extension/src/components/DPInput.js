@@ -1,14 +1,14 @@
 import React from 'react'
 import Suggestion from './ui/Suggestion'
 
-function DPInput({suggestion, ...props}) {
+function DPInput({suggestion, loading, ...props}) {
   const classes = ['textarea', 'has-fixed-size']
 
   return (
-    <>
-      <textarea className={classes.join(' ')} {...props}></textarea>
+    <div className={`control ${loading ? 'is-loading' : ''}`}>
+      <textarea className={classes.join(' ')} {...props} disabled={loading}></textarea>
       {suggestion && <Suggestion text={suggestion} />}
-    </>
+    </div>
   )
 
 }

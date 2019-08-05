@@ -12,3 +12,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; 
 }
+
+
+@mixin animate_from_bottom {
+  animation: bottom_animation .3s linear 1;
+}
+
+@keyframes bottom_animation {
+  0% {
+    top: 12rem;
+  }
+  100% {
+    top: 8.1rem;
+  }
+}

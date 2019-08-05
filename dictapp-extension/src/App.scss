@@ -82,6 +82,8 @@
   }
 
   .control {
+    overflow: hidden;
+
     textarea {
       max-height: 180px;
       min-height: 180px;
@@ -103,12 +105,15 @@
     position: absolute;
     background: #E6E4E4;
     width: 100%;
-    top: 8.9rem;
     border-radius: 0 0 4px 4px;
+    top: 8.1rem;
     padding: 0.3rem .7rem;
     height: 50px;
     color: #64787D;
     word-break: break-all;
+
+    @include animate_from_bottom;
+
 
     &:before {
       @include icon;
@@ -127,6 +132,10 @@
       p {
         cursor: pointer;
         font-size: 13px;
+
+        &:hover {
+          color: black;
+        }
       }
     }
   }
