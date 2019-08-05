@@ -65,6 +65,7 @@ function Translator() {
               suggestion={text && translation.suggestion}
               loading={isLoading}
               value={text}
+              autoFocus
               onChange={onChangeText}
               onKeyDown={preventEnter}
               onKeyUp={searchPhrase} />
