@@ -17,6 +17,7 @@
     background: -webkit-linear-gradient(to right, #FFF2DC, #FFD486, #FFC864);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #FFF2DC, #FFD486, #FFC864); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding: .3rem;
+    justify-content: space-between;
 
     img {
       width: 130px;
@@ -51,7 +52,38 @@
     }
   }
 
+  .flip-button {
+    transition: transform .3s;
+
+    &:active, &:focus {
+      border-color: #dbdbdb;
+      box-shadow: 0px 0px 0px .5px #dbdbdb;
+    }
+
+    &.es {
+      transform: rotateY(180deg);
+
+      .back-button {
+        p {
+          transform: rotateY(180deg);
+        }
+      }
+    }
+
+    .back-button, .front-button {
+      width: 100%;
+      backface-visibility: hidden;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
   .control {
+    overflow: hidden;
+
     textarea {
       max-height: 180px;
       min-height: 180px;
@@ -73,12 +105,15 @@
     position: absolute;
     background: #E6E4E4;
     width: 100%;
-    top: 8.9rem;
     border-radius: 0 0 4px 4px;
+    top: 8.1rem;
     padding: 0.3rem .7rem;
     height: 50px;
     color: #64787D;
     word-break: break-all;
+
+    @include animate_from_bottom;
+
 
     &:before {
       @include icon;
@@ -97,6 +132,10 @@
       p {
         cursor: pointer;
         font-size: 13px;
+
+        &:hover {
+          color: black;
+        }
       }
     }
   }
